@@ -2,6 +2,7 @@ import { ActionFunction, LoaderFunction } from "@remix-run/node";
 import { Form, useActionData, useLoaderData } from "@remix-run/react";
 import { useState } from "react";
 import { getPestisides, predictCropSuccess } from "~/data.server";
+import { FaStar } from "react-icons/fa";
 
 export let loader: LoaderFunction = async () => {
   const res = await getPestisides();
@@ -25,13 +26,13 @@ export let action: ActionFunction = async ({ request }) => {
   };
 
   const successRate = await predictCropSuccess(predictCropSuccessPayload);
+  console.log(successRate);
   return successRate;
 };
 
 export default function Crop() {
-  const successRate: any = useActionData();
+  const successRate: any = useActionData() as string;
   const pesticides: any = useLoaderData();
-  //   console.log(pesticides);
   const [rainfall, setRainfall] = useState(50);
   const [crop, setCrop] = useState("rice");
   const [soilType, setSoilType] = useState("black");
@@ -39,64 +40,99 @@ export default function Crop() {
   const [selectedPesticide, setSelectedPesticide] = useState("none");
 
   return (
-    <div className="crop-container">
-      <Form method="post">
-        <label htmlFor="crop-select">Crop Type</label>
-        <select
-          id="crop-select"
-          name="crop"
-          value={crop}
-          onChange={(e) => setCrop(e.target.value)}
-        >
-          <option value="rice">Rice</option>
-          <option value="wheat" defaultChecked>
-            Wheat
-          </option>
-        </select>
+    <div className="h-full w-screen bg-black pt-[200px] p-12 text-white flex flex-col items-center justify-center gap-8 lg:h-screen lg:flex-row">
+      <Form
+        method="post"
+        className="custom-shadow  space-y-4  border border-2 border-white p-8 rounded-[30px]"
+      >
+        <div className="flex items-center justify-between gap-2">
+          <label
+            htmlFor="crop-select"
+            className="text-lg font-semibold font-montserrat"
+          >
+            crop
+          </label>
+          <select
+            id="crop-select"
+            name="crop"
+            value={crop}
+            onChange={(e) => setCrop(e.target.value)}
+            className=" custom-shadow  w-3/6 h-12 bg-black text-white border border-red-600 border-[2wepx] p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-red-600"
+          >
+            <option value="rice">Rice</option>
+            <option value="wheat">Wheat</option>
+          </select>
+        </div>
 
-        <label htmlFor="rain-fall-value">Rainfall (mm)</label>
-        <input
-          type="number"
-          id="rain-fall-value"
-          name="rainfall"
-          value={rainfall}
-          onChange={(e) => setRainfall(parseInt(e.target.value))}
-        />
+        <div className="flex items-center justify-between gap-2">
+          <label
+            htmlFor="rain-fall-value"
+            className="text-lg font-semibold font-montserrat"
+          >
+            rainfall (mm)
+          </label>
+          <input
+            type="number"
+            id="rain-fall-value"
+            name="rainfall"
+            value={rainfall}
+            onChange={(e) => setRainfall(parseInt(e.target.value))}
+            className="custom-shadow  w-3/6 h-12 bg-black text-white border border-red-600 border-[2wepx] p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-red-600"
+          />
+        </div>
 
-        <label htmlFor="soil-type-select">Soil Type</label>
-        <select
-          id="soil-type-select"
-          name="soil_type"
-          value={soilType}
-          onChange={(e) => setSoilType(e.target.value)}
-        >
-          <option value="black">Black Soil</option>
-          <option value="red" defaultChecked>
-            Red Soil
-          </option>
-        </select>
+        <div className="flex items-center justify-between gap-2">
+          <label
+            htmlFor="soil-type-select"
+            className="text-lg font-semibold font-montserrat"
+          >
+            soil
+          </label>
+          <select
+            id="soil-type-select"
+            name="soil_type"
+            value={soilType}
+            onChange={(e) => setSoilType(e.target.value)}
+            className="custom-shadow  w-3/6 h-12 bg-black text-white border border-red-600 border-[2wepx] p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-red-600"
+          >
+            <option value="black">Black Soil</option>
+            <option value="red">Red Soil</option>
+          </select>
+        </div>
 
-        <label htmlFor="season-select">Season</label>
-        <select
-          id="season-select"
-          name="season"
-          value={season}
-          onChange={(e) => setSeason(e.target.value)}
-        >
-          <option value="summer">Summer</option>
-          <option value="winter" defaultChecked>
-            Winter
-          </option>
-          <option value="rainy">Rainy</option>
-        </select>
+        <div className="flex items-center justify-between gap-2">
+          <label
+            htmlFor="season-select"
+            className="text-lg font-semibold font-montserrat"
+          >
+            season
+          </label>
+          <select
+            id="season-select"
+            name="season"
+            value={season}
+            onChange={(e) => setSeason(e.target.value)}
+            className="custom-shadow  w-3/6 h-12 bg-black text-white border border-red-600 border-[2wepx] p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-red-600"
+          >
+            <option value="summer">Summer</option>
+            <option value="winter">Winter</option>
+            <option value="rainy">Rainy</option>
+          </select>
+        </div>
 
-        <label htmlFor="pesticide-select">Pesticide</label>
-        <div>
+        <div className="flex items-center justify-between gap-2 ">
+          <label
+            htmlFor="pesticide-select"
+            className="text-lg font-semibold font-montserrat "
+          >
+            pesticide
+          </label>
           <select
             id="pesticide-select"
             name="pesticide"
             value={selectedPesticide}
             onChange={(e) => setSelectedPesticide(e.target.value)}
+            className="custom-shadow w-3/6 h-12 bg-black text-white border border-red-600 border-[2wepx] p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-red-600"
           >
             <option value="" disabled>
               Choose Pesticide
@@ -108,11 +144,21 @@ export default function Crop() {
             ))}
           </select>
         </div>
-
-        <button type="submit">Get Success Rate</button>
+        <div className="w-full flex pt-8 items-center justify-center">
+          <button
+            type="submit"
+            className="custom-shadow btn bg-black text-red-600 border-[2.5px] border-red-600 Z py-3 px-6 rounded-full transition-transform hover:bg-white hover:text-black hover:shadow-lg"
+          >
+            Get Success Rate
+          </button>
+        </div>
       </Form>
 
-      <div>Success Rate: {JSON.stringify(successRate)}%</div>
+      <div className="mt-6 text-center text-xl flex flex-col items-center justify-center">
+        <FaStar color="red" size={25} />
+        Success Rate:
+        {JSON.stringify(successRate)}%
+      </div>
     </div>
   );
 }
