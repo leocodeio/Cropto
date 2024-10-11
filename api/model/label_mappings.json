@@ -1,0 +1,1 @@
+{"crop": {"rice": 0, "wheat": 1}, "soil_type": {"black": 0, "red": 1}, "season": {"rainy": 0, "summer": 1, "winter": 2}, "pesticide": {"Carbendazim": 0, "Chlorpyrifos": 1, "Copper Sulfate": 2, "Deltamethrin": 3, "Glyphosate": 4, "Imidacloprid": 5, "Mancozeb": 6}}
