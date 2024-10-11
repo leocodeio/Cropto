@@ -15,6 +15,7 @@ export default {
           '"Segoe UI Symbol"',
           '"Noto Color Emoji"',
         ],
+        playfair: ['"Playfair Display"', "serif"],
       },
     },
   },
