@@ -1,8 +1,6 @@
 import json
 import numpy as np
 import pandas as pd
-from sklearn.ensemble import RandomForestRegressor
-from sklearn.preprocessing import LabelEncoder
 import joblib
 
 # Load the model
