@@ -1,0 +1,1 @@
+{"model_name": "GradientBoosting", "coefficients": [0.6313956022117561, 0.08509052119609584, 0.12393408993018608, 0.07852550207551724, 0.08105428458644484], "feature_names": ["rainfall", "crop", "soil_type", "season", "pesticide"]}
