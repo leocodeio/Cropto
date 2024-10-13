@@ -40,7 +40,7 @@ export default function Crop() {
   const [selectedPesticide, setSelectedPesticide] = useState("none");
 
   return (
-    <div className="h-full w-screen bg-black pt-[200px] p-12 text-white flex flex-col items-center justify-center gap-8 lg:h-screen lg:flex-row">
+    <div className="h-full w-screen bg-black pt-[150px] p-12 text-white flex flex-col items-center justify-center gap-8 lg:h-screen lg:flex-row">
       <Form
         method="post"
         className="custom-shadow  space-y-4  border border-2 border-white p-8 rounded-[30px]"
@@ -48,7 +48,7 @@ export default function Crop() {
         <div className="flex items-center justify-between gap-2">
           <label
             htmlFor="crop-select"
-            className="text-lg font-semibold font-montserrat"
+            className="text-md font-semibold font-montserrat"
           >
             crop
           </label>
@@ -57,7 +57,7 @@ export default function Crop() {
             name="crop"
             value={crop}
             onChange={(e) => setCrop(e.target.value)}
-            className=" custom-shadow  w-3/6 h-12 bg-black text-white border border-red-600 border-[2wepx] p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-red-600"
+            className=" custom-shadow  w-1/3 h-auto bg-black text-white border border-red-600 border-[2wepx] p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-red-600"
           >
             <option value="rice">Rice</option>
             <option value="wheat">Wheat</option>
@@ -67,7 +67,7 @@ export default function Crop() {
         <div className="flex items-center justify-between gap-2">
           <label
             htmlFor="rain-fall-value"
-            className="text-lg font-semibold font-montserrat"
+            className="text-md font-semibold font-montserrat"
           >
             rainfall (mm)
           </label>
@@ -77,14 +77,14 @@ export default function Crop() {
             name="rainfall"
             value={rainfall}
             onChange={(e) => setRainfall(parseInt(e.target.value))}
-            className="custom-shadow  w-3/6 h-12 bg-black text-white border border-red-600 border-[2wepx] p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-red-600"
+            className="custom-shadow  w-1/3 h-auto bg-black text-white border border-red-600 border-[2wepx] p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-red-600"
           />
         </div>
 
         <div className="flex items-center justify-between gap-2">
           <label
             htmlFor="soil-type-select"
-            className="text-lg font-semibold font-montserrat"
+            className="text-md font-semibold font-montserrat"
           >
             soil
           </label>
@@ -93,7 +93,7 @@ export default function Crop() {
             name="soil_type"
             value={soilType}
             onChange={(e) => setSoilType(e.target.value)}
-            className="custom-shadow  w-3/6 h-12 bg-black text-white border border-red-600 border-[2wepx] p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-red-600"
+            className="custom-shadow  w-1/3 h-auto bg-black text-white border border-red-600 border-[2wepx] p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-red-600"
           >
             <option value="black">Black Soil</option>
             <option value="red">Red Soil</option>
@@ -103,7 +103,7 @@ export default function Crop() {
         <div className="flex items-center justify-between gap-2">
           <label
             htmlFor="season-select"
-            className="text-lg font-semibold font-montserrat"
+            className="text-md font-semibold font-montserrat"
           >
             season
           </label>
@@ -112,7 +112,7 @@ export default function Crop() {
             name="season"
             value={season}
             onChange={(e) => setSeason(e.target.value)}
-            className="custom-shadow  w-3/6 h-12 bg-black text-white border border-red-600 border-[2wepx] p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-red-600"
+            className="custom-shadow  w-1/3 h-auto bg-black text-white border border-red-600 border-[2wepx] p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-red-600"
           >
             <option value="summer">Summer</option>
             <option value="winter">Winter</option>
@@ -123,7 +123,7 @@ export default function Crop() {
         <div className="flex items-center justify-between gap-2 ">
           <label
             htmlFor="pesticide-select"
-            className="text-lg font-semibold font-montserrat "
+            className="text-md font-semibold font-montserrat "
           >
             pesticide
           </label>
@@ -132,7 +132,7 @@ export default function Crop() {
             name="pesticide"
             value={selectedPesticide}
             onChange={(e) => setSelectedPesticide(e.target.value)}
-            className="custom-shadow w-3/6 h-12 bg-black text-white border border-red-600 border-[2wepx] p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-red-600"
+            className="custom-shadow w-1/3 h-auto bg-black text-white border border-red-600 border-[2wepx] p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-red-600"
           >
             <option value="" disabled>
               Choose Pesticide
@@ -144,7 +144,7 @@ export default function Crop() {
             ))}
           </select>
         </div>
-        <div className="w-full flex pt-8 items-center justify-center">
+        <div className="w-full flex pt-2 items-center justify-center">
           <button
             type="submit"
             className="custom-shadow btn bg-black text-red-600 border-[2.5px] border-red-600 Z py-3 px-6 rounded-full transition-transform hover:bg-white hover:text-black hover:shadow-lg"
@@ -154,10 +154,12 @@ export default function Crop() {
         </div>
       </Form>
 
-      <div className="mt-6 text-center text-xl flex flex-col items-center justify-center">
+      <div className="mt-2 text-center text-xl flex flex-col items-center justify-center">
         <FaStar color="red" size={25} />
-        Success Rate:
-        {JSON.stringify(successRate)}%
+        <div> Success Rate:</div>{" "}
+        <div className="text-2xl font-semibold">
+          {successRate ? `${JSON.stringify(successRate)}%` : ""}
+        </div>
       </div>
     </div>
   );

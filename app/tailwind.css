@@ -9,3 +9,16 @@
 .header-shadow {
   box-shadow: 8px 4px 0px #ff0000;
 }
+* {
+  background-color: black;
+}
+
+.body{
+  font-family: "Inter", sans-serif;
+  box-sizing: border-box;
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: black;
+}
