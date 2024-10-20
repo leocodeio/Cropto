@@ -47,7 +47,7 @@ pnpm run dev
 cd api
 poetry shell
 poetry install
-uvicorn fast_api:app --reload
+uvicorn main:app --reload
 
 sample input for /predict endpoint :
 
