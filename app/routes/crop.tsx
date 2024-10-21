@@ -38,12 +38,21 @@ export default function Crop() {
   const [soilType, setSoilType] = useState("black");
   const [season, setSeason] = useState("winter");
   const [selectedPesticide, setSelectedPesticide] = useState("none");
+  const [isButtonDisabled, setIsButtonDisabled] = useState(false); 
+
+  const handleSubmit = () => {
+    setIsButtonDisabled(true);
+    setTimeout(() => {
+      setIsButtonDisabled(false);
+    }, 4000); 
+  };
 
   return (
     <div className="h-full w-screen bg-black pt-[150px] p-12 text-white flex flex-col items-center justify-center gap-8 lg:h-screen lg:flex-row">
       <Form
         method="post"
-        className="custom-shadow  space-y-4  border border-2 border-white p-8 rounded-[30px]"
+        className="custom-shadow  space-y-4 border-2 border-white p-8 rounded-[30px]"
+        onSubmit={handleSubmit}
       >
         <div className="flex items-center justify-between gap-2">
           <label
@@ -147,9 +156,10 @@ export default function Crop() {
         <div className="w-full flex pt-2 items-center justify-center">
           <button
             type="submit"
-            className="custom-shadow btn bg-black text-red-600 border-[2.5px] border-red-600 Z py-3 px-6 rounded-full transition-transform hover:bg-white hover:text-black hover:shadow-lg"
+            className="custom-shadow btn bg-black text-red-600 border-[2.5px] border-red-600 Z py-3 px-6 rounded-full transition-transform hover:bg-white hover:text-black hover:shadow-lg w-[190px]"
+            disabled={isButtonDisabled} 
           >
-            Get Success Rate
+              {isButtonDisabled ? "Please wait..." : "Get Success Rate"}
           </button>
         </div>
       </Form>
