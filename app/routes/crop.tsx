@@ -38,13 +38,22 @@ export default function Crop() {
   const [soilType, setSoilType] = useState("black");
   const [season, setSeason] = useState("winter");
   const [selectedPesticide, setSelectedPesticide] = useState("none");
-  const [isButtonDisabled, setIsButtonDisabled] = useState(false); 
+  const [isButtonDisabled, setIsButtonDisabled] = useState(false);
 
+  const [count, setCount] = useState(4);
   const handleSubmit = () => {
     setIsButtonDisabled(true);
-    setTimeout(() => {
-      setIsButtonDisabled(false);
-    }, 4000); 
+    setCount(4);
+
+    const interval = setInterval(() => {
+      setCount((prevCount) => {
+        if (prevCount === 1) {
+          setIsButtonDisabled(false);
+          clearInterval(interval);
+        }
+        return prevCount - 1;
+      });
+    }, 1000);
   };
 
   return (
@@ -157,9 +166,9 @@ export default function Crop() {
           <button
             type="submit"
             className="custom-shadow btn bg-black text-red-600 border-[2.5px] border-red-600 Z py-3 px-6 rounded-full transition-transform hover:bg-white hover:text-black hover:shadow-lg w-[190px]"
-            disabled={isButtonDisabled} 
+            disabled={isButtonDisabled}
           >
-              {isButtonDisabled ? "Please wait..." : "Get Success Rate"}
+            {isButtonDisabled ? `Plase wait... ${count}` : "Get Success Rate"}
           </button>
         </div>
       </Form>
