@@ -14,19 +14,29 @@ export const loader: LoaderFunction = async () => {
 
 export default function Index() {
   return (
-    <div className="bg-white h-screen flex flex-col items-center justify-center text-center font-sans p-4">
-      <p className="bg-white">
-        Welcome - developed by catalyst community -
-        <a href="https://github.com/leocodeio" className="bg-white">
-          <b className="bg-white">@leocodeio</b>
-        </a>
-      </p>
-      <Link
-        className="bg-white border border-2 border-black px-2 py-1 rounded"
-        to="/crop"
-      >
-        Home
-      </Link>
-    </div>
+    <section className="flex flex-col items-center justify-center text-center py-20 gap-8">
+      <div className="space-y-6 max-w-2xl">
+        <h1 className="heading-xl">Predict Crop Success Intelligently</h1>
+        <p className="text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
+          Data‑driven insights for agriculture. Enter variables like rainfall, soil type, season and pesticides to estimate success probability and guide better planning.
+        </p>
+        <div className="flex flex-col sm:flex-row gap-4 items-center justify-center">
+          <Link to="/crop" className="btn-primary w-full sm:w-auto">
+            Get Started
+          </Link>
+          <a
+            href="https://github.com/leocodeio"
+            target="_blank"
+            rel="noreferrer"
+            className="btn-outline w-full sm:w-auto"
+          >
+            GitHub
+          </a>
+        </div>
+        <p className="muted">
+          Built by the catalyst community — <span className="font-medium text-red-600 dark:text-red-400">@leocodeio</span>
+        </p>
+      </div>
+    </section>
   );
 }

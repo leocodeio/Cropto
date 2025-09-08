@@ -9,6 +9,7 @@ import type { LinksFunction, MetaFunction } from "@remix-run/node";
 
 import "./tailwind.css";
 import Header from "./common/Header";
+import { ThemeProvider } from "./context/ThemeContext";
 
 export const links: LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -46,9 +47,14 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Meta />
         <Links />
       </head>
-      <body>
-        <Header />
-        {children}
+      <body className="relative font-sans selection:bg-red-600/90 selection:text-white">
+        <div className="pointer-events-none fixed inset-0 -z-10 opacity-40 dark:opacity-30 [mask-image:radial-gradient(circle_at_center,black,transparent)]">
+          <div className="absolute inset-0 bg-gradient-to-br from-red-600/10 via-transparent to-orange-400/10 dark:from-red-500/10 dark:via-transparent dark:to-orange-300/10" />
+        </div>
+        <ThemeProvider>
+          <Header />
+          <main className="pt-24 pb-12 px-4 sm:px-6 max-w-6xl mx-auto w-full">{children}</main>
+        </ThemeProvider>
         <ScrollRestoration />
         <Scripts />
       </body>

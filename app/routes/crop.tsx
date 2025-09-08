@@ -57,129 +57,134 @@ export default function Crop() {
   };
 
   return (
-    <div className="h-full w-screen bg-black pt-[150px] p-12 text-white flex flex-col items-center justify-center gap-8 lg:h-screen lg:flex-row">
+    <div className="w-full grid gap-12 lg:grid-cols-[minmax(0,560px)_1fr]">
       <Form
         method="post"
-        className="custom-shadow  space-y-4 border-2 border-white p-8 rounded-[30px]"
         onSubmit={handleSubmit}
+        className="card p-8 space-y-8"
       >
-        <div className="flex items-center justify-between gap-2">
-          <label
-            htmlFor="crop-select"
-            className="text-md font-semibold font-montserrat"
-          >
-            crop
-          </label>
-          <select
-            id="crop-select"
-            name="crop"
-            value={crop}
-            onChange={(e) => setCrop(e.target.value)}
-            className=" custom-shadow  w-1/3 h-auto bg-black text-white border border-red-600 border-[2wepx] p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-red-600"
-          >
-            <option value="rice">Rice</option>
-            <option value="wheat">Wheat</option>
-          </select>
+        <header className="space-y-2">
+          <h2 className="text-2xl font-bold tracking-tight">Input Variables</h2>
+          <p className="muted">
+            Provide the environmental and cultivation parameters below. The model
+            will estimate a success probability.
+          </p>
+        </header>
+        <div className="grid gap-6 sm:grid-cols-2">
+          <div className="space-y-2">
+            <label htmlFor="crop-select" className="label">
+              Crop
+            </label>
+            <select
+              id="crop-select"
+              name="crop"
+              value={crop}
+              onChange={(e) => setCrop(e.target.value)}
+              className="select"
+            >
+              <option value="rice">Rice</option>
+              <option value="wheat">Wheat</option>
+            </select>
+          </div>
+          <div className="space-y-2">
+            <label htmlFor="rain-fall-value" className="label">
+              Rainfall (mm)
+            </label>
+            <input
+              type="number"
+              id="rain-fall-value"
+              name="rainfall"
+              value={rainfall}
+              onChange={(e) => setRainfall(parseInt(e.target.value) || 0)}
+              className="input"
+              min={0}
+            />
+          </div>
+          <div className="space-y-2">
+            <label htmlFor="soil-type-select" className="label">
+              Soil Type
+            </label>
+            <select
+              id="soil-type-select"
+              name="soil_type"
+              value={soilType}
+              onChange={(e) => setSoilType(e.target.value)}
+              className="select"
+            >
+              <option value="black">Black Soil</option>
+              <option value="red">Red Soil</option>
+            </select>
+          </div>
+          <div className="space-y-2">
+            <label htmlFor="season-select" className="label">
+              Season
+            </label>
+            <select
+              id="season-select"
+              name="season"
+              value={season}
+              onChange={(e) => setSeason(e.target.value)}
+              className="select"
+            >
+              <option value="summer">Summer</option>
+              <option value="winter">Winter</option>
+              <option value="rainy">Rainy</option>
+            </select>
+          </div>
+          <div className="space-y-2 sm:col-span-2">
+            <label htmlFor="pesticide-select" className="label">
+              Pesticide
+            </label>
+            <select
+              id="pesticide-select"
+              name="pesticide"
+              value={selectedPesticide}
+              onChange={(e) => setSelectedPesticide(e.target.value)}
+              className="select"
+            >
+              <option value="none">None</option>
+              {pesticides.map((pesticide: string, index: number) => (
+                <option key={index} value={pesticide}>
+                  {pesticide}
+                </option>
+              ))}
+            </select>
+          </div>
         </div>
-
-        <div className="flex items-center justify-between gap-2">
-          <label
-            htmlFor="rain-fall-value"
-            className="text-md font-semibold font-montserrat"
-          >
-            rainfall (mm)
-          </label>
-          <input
-            type="number"
-            id="rain-fall-value"
-            name="rainfall"
-            value={rainfall}
-            onChange={(e) => setRainfall(parseInt(e.target.value))}
-            className="custom-shadow  w-1/3 h-auto bg-black text-white border border-red-600 border-[2wepx] p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-red-600"
-          />
-        </div>
-
-        <div className="flex items-center justify-between gap-2">
-          <label
-            htmlFor="soil-type-select"
-            className="text-md font-semibold font-montserrat"
-          >
-            soil
-          </label>
-          <select
-            id="soil-type-select"
-            name="soil_type"
-            value={soilType}
-            onChange={(e) => setSoilType(e.target.value)}
-            className="custom-shadow  w-1/3 h-auto bg-black text-white border border-red-600 border-[2wepx] p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-red-600"
-          >
-            <option value="black">Black Soil</option>
-            <option value="red">Red Soil</option>
-          </select>
-        </div>
-
-        <div className="flex items-center justify-between gap-2">
-          <label
-            htmlFor="season-select"
-            className="text-md font-semibold font-montserrat"
-          >
-            season
-          </label>
-          <select
-            id="season-select"
-            name="season"
-            value={season}
-            onChange={(e) => setSeason(e.target.value)}
-            className="custom-shadow  w-1/3 h-auto bg-black text-white border border-red-600 border-[2wepx] p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-red-600"
-          >
-            <option value="summer">Summer</option>
-            <option value="winter">Winter</option>
-            <option value="rainy">Rainy</option>
-          </select>
-        </div>
-
-        <div className="flex items-center justify-between gap-2 ">
-          <label
-            htmlFor="pesticide-select"
-            className="text-md font-semibold font-montserrat "
-          >
-            pesticide
-          </label>
-          <select
-            id="pesticide-select"
-            name="pesticide"
-            value={selectedPesticide}
-            onChange={(e) => setSelectedPesticide(e.target.value)}
-            className="custom-shadow w-1/3 h-auto bg-black text-white border border-red-600 border-[2wepx] p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-red-600"
-          >
-            <option value="" disabled>
-              Choose Pesticide
-            </option>
-            {pesticides.map((pesticide: string, index: number) => (
-              <option key={index} value={pesticide}>
-                {pesticide}
-              </option>
-            ))}
-          </select>
-        </div>
-        <div className="w-full flex pt-2 items-center justify-center">
+        <div className="flex items-center gap-4 pt-2">
           <button
             type="submit"
-            className="custom-shadow btn bg-black text-red-600 border-[2.5px] border-red-600 Z py-3 px-6 rounded-full transition-transform hover:bg-white hover:text-black hover:shadow-lg w-[190px]"
+            className="btn-primary"
             disabled={isButtonDisabled}
           >
-            {isButtonDisabled ? `Plase wait... ${count}` : "Get Success Rate"}
+            {isButtonDisabled ? `Please wait… ${count}` : "Get Success Rate"}
           </button>
         </div>
+        <p className="muted text-xs">
+          Model output is an estimation only. Always validate with local agronomic
+          expertise before large-scale decisions.
+        </p>
       </Form>
-
-      <div className="mt-2 text-center text-xl flex flex-col items-center justify-center">
-        <FaStar color="red" size={25} />
-        <div> Success Rate:</div>{" "}
-        <div className="text-2xl font-semibold">
-          {successRate ? `${JSON.stringify(successRate)}%` : ""}
+      <aside className="space-y-6">
+        <div className="card p-6 space-y-4 w-full max-w-sm">
+          <div className="flex items-center gap-3">
+            <FaStar className="text-red-600" size={22} />
+            <h3 className="font-semibold tracking-tight">Success Rate</h3>
+          </div>
+          <div
+            className="min-h-[88px] flex items-center justify-center rounded-md bg-gray-50 dark:bg-gray-900 border border-dashed border-gray-300 dark:border-gray-700"
+            aria-live="polite"
+          >
+            {successRate ? (
+              <span className="text-4xl font-extrabold bg-gradient-to-r from-red-600 via-red-500 to-orange-400 dark:from-red-400 dark:via-red-500 dark:to-orange-300 text-transparent bg-clip-text">
+                {`${JSON.stringify(successRate).substring(0, 4)}%`}
+              </span>
+            ) : (
+              <span className="muted">Run a prediction to see results</span>
+            )}
+          </div>
         </div>
-      </div>
+      </aside>
     </div>
   );
 }

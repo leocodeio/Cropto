@@ -2,23 +2,69 @@
 @tailwind components;
 @tailwind utilities;
 
-.custom-shadow {
-  box-shadow: 4px 4px 0px #ffffff;
-}
-
-.header-shadow {
-  box-shadow: 8px 4px 0px #ff0000;
-}
+/* Reset overrides */
 * {
-  background-color: black;
+  @apply antialiased; /* remove global background override */
 }
 
-.body{
+/***********************
+ * Custom Design Tokens *
+ ***********************/
+:root {
+  --ring: 0 0% 0%;
+}
+.dark {
+  --ring: 0 0% 100%;
+}
+
+/***********************
+ * Layered Components   *
+ ***********************/
+@layer components {
+  .btn {
+    @apply inline-flex items-center justify-center font-medium rounded-full px-5 py-2.5 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-red-500 disabled:opacity-50 disabled:cursor-not-allowed ring-offset-white dark:ring-offset-gray-900;
+  }
+  .btn-primary {
+    @apply btn bg-red-600 text-white hover:bg-red-500 dark:hover:bg-red-500;
+  }
+  .btn-outline {
+    @apply btn border-2 border-red-600 text-red-600 bg-transparent hover:bg-red-600 hover:text-white dark:hover:text-white;
+  }
+  .card {
+    @apply rounded-2xl border border-gray-200/70 dark:border-gray-700 bg-white dark:bg-gray-800 shadow-sm backdrop-blur supports-[backdrop-filter]:bg-white/80 dark:supports-[backdrop-filter]:bg-gray-800/70;
+  }
+  .input {
+    @apply w-full rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-900 px-3 py-2 text-sm text-gray-900 dark:text-gray-100 shadow-sm focus:border-red-500 focus:ring-2 focus:ring-red-500/40 focus:outline-none transition-colors;
+  }
+  .select {
+    @apply input pr-8 cursor-pointer;
+  }
+  .label {
+    @apply text-sm font-medium text-gray-700 dark:text-gray-300 select-none;
+  }
+  .muted {
+    @apply text-sm text-gray-500 dark:text-gray-400;
+  }
+  .heading-xl {
+    @apply text-4xl sm:text-5xl font-extrabold tracking-tight bg-gradient-to-r from-red-600 via-red-500 to-orange-400 dark:from-red-400 dark:via-red-500 dark:to-orange-300 text-transparent bg-clip-text;
+  }
+}
+
+/***********************
+ * Utilities overrides  *
+ ***********************/
+.custom-shadow {
+  box-shadow: 4px 4px 0px #ffffff10;
+}
+.header-shadow {
+  box-shadow: 0 4px 24px -6px rgba(0,0,0,0.15);
+}
+
+body {
   font-family: "Inter", sans-serif;
-  box-sizing: border-box;
-  height: 100%;
-  width: 100%;
-  margin: 0;
-  padding: 0;
-  background-color: black;
+  @apply min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-100 text-gray-900 dark:from-gray-950 dark:via-gray-900 dark:to-gray-950 dark:text-gray-100 transition-colors;
+}
+
+html {
+  scroll-behavior: smooth;
 }
