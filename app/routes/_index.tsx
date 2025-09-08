@@ -1,10 +1,15 @@
-import type { MetaFunction } from "@remix-run/node";
+import type { LoaderFunction, MetaFunction } from "@remix-run/node";
+import { redirect } from "@remix-run/node";
 import { Link } from "@remix-run/react";
 export const meta: MetaFunction = () => {
   return [
     { title: "cropto | credit" },
     { name: "description", content: "Welcome to catalyst!" },
   ];
+};
+
+export const loader: LoaderFunction = async () => {
+  return redirect("/crop");
 };
 
 export default function Index() {
